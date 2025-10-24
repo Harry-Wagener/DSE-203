@@ -1,0 +1,34 @@
+# Environment variables file (do NOT commit)
+.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+$py.class
+
+# Virtual environment directories
+venv/
+env/
+.venv/
+
+# macOS files
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Python packaging
+dist/
+build/
+*.egg-info/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Ignore sensitive config files
+*.secret
+secrets.yaml
