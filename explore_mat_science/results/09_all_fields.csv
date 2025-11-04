@@ -1,0 +1,27 @@
+field_id,field_display_name,domain_display_name,topic_count,total_works
+https://openalex.org/fields/11,Agricultural and Biological Sciences,Life Sciences,235,10760038
+https://openalex.org/fields/12,Arts and Humanities,Social Sciences,266,13922776
+https://openalex.org/fields/13,"Biochemistry, Genetics and Molecular Biology",Life Sciences,248,11821319
+https://openalex.org/fields/14,"Business, Management and Accounting",Social Sciences,146,6486215
+https://openalex.org/fields/15,Chemical Engineering,Physical Sciences,13,709230
+https://openalex.org/fields/16,Chemistry,Physical Sciences,101,5362131
+https://openalex.org/fields/17,Computer Science,Physical Sciences,302,12853207
+https://openalex.org/fields/18,Decision Sciences,Social Sciences,60,2023440
+https://openalex.org/fields/35,Dentistry,Health Sciences,13,762025
+https://openalex.org/fields/19,Earth and Planetary Sciences,Physical Sciences,57,4203116
+https://openalex.org/fields/20,"Economics, Econometrics and Finance",Social Sciences,107,5963284
+https://openalex.org/fields/21,Energy,Physical Sciences,27,1267965
+https://openalex.org/fields/22,Engineering,Physical Sciences,560,26348822
+https://openalex.org/fields/23,Environmental Science,Physical Sciences,202,9693606
+https://openalex.org/fields/36,Health Professions,Health Sciences,107,5872379
+https://openalex.org/fields/24,Immunology and Microbiology,Life Sciences,44,2063077
+https://openalex.org/fields/25,Materials Science,Physical Sciences,123,7211294
+https://openalex.org/fields/26,Mathematics,Physical Sciences,82,3092983
+https://openalex.org/fields/27,Medicine,Health Sciences,692,37945968
+https://openalex.org/fields/28,Neuroscience,Life Sciences,62,3216180
+https://openalex.org/fields/29,Nursing,Health Sciences,21,1038760
+https://openalex.org/fields/30,"Pharmacology, Toxicology and Pharmaceutics",Life Sciences,25,852198
+https://openalex.org/fields/31,Physics and Astronomy,Physical Sciences,104,7432329
+https://openalex.org/fields/32,Psychology,Social Sciences,144,5919390
+https://openalex.org/fields/33,Social Sciences,Social Sciences,764,33462858
+https://openalex.org/fields/34,Veterinary,Health Sciences,11,363318

@@ -1,0 +1,34 @@
+================================================================================
+MATERIAL SCIENCE TOPIC EXPLORATION SUMMARY
+================================================================================
+
+AVAILABLE DOMAINS:
+--------------------------------------------------------------------------------
+                     domain_id domain_display_name  topic_count
+https://openalex.org/domains/4     Health Sciences          844
+https://openalex.org/domains/1       Life Sciences          614
+https://openalex.org/domains/3   Physical Sciences         1571
+https://openalex.org/domains/2     Social Sciences         1487
+
+MATERIAL-RELATED DOMAINS:
+--------------------------------------------------------------------------------
+                     domain_id domain_display_name  topic_count
+https://openalex.org/domains/3   Physical Sciences         1571
+
+MATERIAL SCIENCE FIELDS:
+--------------------------------------------------------------------------------
+                      field_id field_display_name domain_display_name  topic_count  total_works
+https://openalex.org/fields/25  Materials Science   Physical Sciences          123      7211294
+
+TOTAL WORKS IN MATERIAL FIELDS: 7,211,294
+
+WORK COUNT SUMMARY BY FIELD:
+--------------------------------------------------------------------------------
+  field_display_name domain_display_name  unique_topics  total_works  avg_works_per_topic  total_citations
+         Engineering   Physical Sciences            560     26348822         47051.467857        266187374
+   Materials Science   Physical Sciences            123      7211294         58628.406504        116798988
+Chemical Engineering   Physical Sciences             13       709230         54556.153846         12000322
+
+================================================================================
+Review the CSV files for detailed results.
+================================================================================
