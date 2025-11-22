@@ -3,6 +3,8 @@ import csv
 from lxml import etree
 import os
 from concurrent.futures import ProcessPoolExecutor
+import time
+from datetime import datetime
 
 # --- CONFIGURATION ---
 DB_CONFIG = {
@@ -20,13 +22,18 @@ MAX_WORKERS = 30
 MATSCI_CPC_CODES = ['C01', 'C03', 'C04', 'C08', 'C21', 'C22', 'C30', 'B82']
 MATSCI_USPC_CLASSES = ['29', '75', '148', '420', '423', '427', '428']
 
+
+def _format_seconds(sec: float) -> str:
+    """Return H:MM:SS for seconds."""
+    return time.strftime('%H:%M:%S', time.gmtime(sec))
+
 def build_sql_filter(year):
     conditions = []
     for code in MATSCI_CPC_CODES:
         conditions.append(f"content LIKE '%<classification-cpc%>{code}%'")
         conditions.append(f"content LIKE '%<B51%>{code}%'")
 
-    if year < 2015:
+    if year < 2013:
         for cls in MATSCI_USPC_CLASSES:
             conditions.append(f"content LIKE '%<classification-us>%{cls}/%'")
             conditions.append(f"content LIKE '%<class>{cls}</class>%'")
@@ -88,7 +95,9 @@ def process_year(year):
     It opens its OWN database connection and writes its OWN csv file.
     """
     output_filename = f"patents_part_{year}.csv"
-    print(f"[{year}] Starting worker...")
+    start_monotonic = time.monotonic()
+    start_ts = datetime.now().isoformat()
+    print(f"[{year}] Starting worker at {start_ts}...")
 
     try:
         with psycopg.connect(**DB_CONFIG) as conn:
@@ -118,18 +127,25 @@ def process_year(year):
                             writer.writerows(batch_data)
                             count += len(batch_data)
 
-            print(f"[{year}] Finished! Saved {count} rows.")
-            return f"Year {year} Success: {count} rows"
+            elapsed = time.monotonic() - start_monotonic
+            print(f"[{year}] Finished! Saved {count} rows. Time taken: {_format_seconds(elapsed)}")
+            return f"Year {year} Success: {count} rows in {_format_seconds(elapsed)}"
 
     except Exception as e:
-        print(f"[{year}] FAILED: {e}")
-        return f"Year {year} Failed: {e}"
+        elapsed = time.monotonic() - start_monotonic
+        print(f"[{year}] FAILED after {_format_seconds(elapsed)}: {e}")
+        return f"Year {year} Failed after {_format_seconds(elapsed)}: {e}"
+
 
 def main():
     # Range: 2002 to 2024
-    years_to_process = list(range(2002, 2025))
+    # years_to_process = list(range(2002,2025))
 
-    print(f"Starting pool with {MAX_WORKERS} workers for {len(years_to_process)} years...")
+    # Remaining years
+    years_to_process = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2021, 2023, 2024]
+
+    overall_start = time.monotonic()
+    print(f"{datetime.now().isoformat()} - Starting pool with {MAX_WORKERS} workers for {len(years_to_process)} years...")
 
     with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
         results = executor.map(process_year, years_to_process)
@@ -152,5 +168,16 @@ def main():
                         outfile.write(line)
                 os.remove(fname) # Cleanup
 
+    overall_elapsed = time.monotonic() - overall_start
+    print(f"All processing and merge complete. Total time: {_format_seconds(overall_elapsed)}")
+
 if __name__ == "__main__":
     main()
+
+
+# After matching with OpenAlex views, you can use this query to query specific patents
+# uspto_xml.us_patents_raw has mostly empty patent_id column (97% empty) but the xml extracted result should have patent_id
+# filled since we extract it from the xml content. 06387940 is example patent_id.
+
+# SELECT * FROM uspto_xml.us_patents_raw
+# WHERE content LIKE '%<doc-number>06387940</doc-number>%';
